@@ -1,7 +1,39 @@
-from django.shortcuts import render
-
 from django.contrib.auth.views import LoginView
-from .forms import CustomAuthenticationForm
+from django.views.generic.base import TemplateView
+from django.views.generic import UpdateView
+from django.urls import reverse_lazy
+
+from .forms import CustomAuthenticationForm, CustomUserForm
+from .models import CustomUser
+
 
 class CustomLoginView(LoginView):
+    """
+    Кастомное представление страницы авторизации
+    Передает форму авторизации
+    """
     form_class = CustomAuthenticationForm
+
+
+class ProfileView(TemplateView):
+    """
+    Представление профиля
+    Передает форму для работы со данными о пользователе
+    """
+    template_name = 'users/profile.html'
+
+    def get_context_data(self, **kwargs):
+        """Метод формирования контекста"""
+        context = super().get_context_data(**kwargs)
+        context['form'] = CustomUserForm
+        return context
+
+
+class UserUpdate(UpdateView):
+    """Представление для обработки обновлений данных о пользователе"""
+    model = CustomUser
+    form_class = CustomUserForm
+
+    template_name = 'users/profile.html'
+
+    success_url = reverse_lazy('users:profile')
