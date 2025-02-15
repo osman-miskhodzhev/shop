@@ -1,10 +1,21 @@
 from django.contrib.auth.views import LoginView
 from django.views.generic.base import TemplateView
-from django.views.generic import UpdateView
+from django.views.generic import UpdateView, CreateView
 from django.urls import reverse_lazy
 
-from .forms import CustomAuthenticationForm, CustomUserForm
+from .forms import (
+    CustomAuthenticationForm,
+    CustomUserForm,
+    UserRegistrationForm
+)
 from .models import CustomUser
+
+
+class UserRegistration(CreateView):
+    template_name = 'registration/registration.html'
+    model = CustomUser
+    form_class = UserRegistrationForm
+    success_url = reverse_lazy('users:login')
 
 
 class CustomLoginView(LoginView):

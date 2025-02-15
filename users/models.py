@@ -12,7 +12,8 @@ class CustomUser(AbstractUser):
     """
     profile_image = models.ImageField(
         verbose_name='Фото профиля',
-        upload_to='users/'
+        upload_to='users/',
+        default='users/baselogo.jpg'
     )
 
     first_name = models.CharField(
