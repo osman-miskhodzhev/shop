@@ -15,7 +15,6 @@ class CustomUser(AbstractUser):
         upload_to='users/',
         default='users/baselogo.jpg'
     )
-
     first_name = models.CharField(
         verbose_name='Имя',
         max_length=120,

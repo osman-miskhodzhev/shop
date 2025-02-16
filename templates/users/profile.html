@@ -99,4 +99,15 @@
             </div>
         </div>
     </div>
+    <script>
+        let first_name = document.getElementById('inputFirstName');
+        let last_name = document.getElementById('inputLastName');
+        let username = document.getElementById('inputUsername');
+        let email = document.getElementById('inputEmailAddress');
+
+        first_name.setAttribute('value', '{{user.first_name}}');
+        last_name.setAttribute('value', '{{user.last_name}}');
+        username.setAttribute('value', '{{user.username}}');
+        email.setAttribute('value', '{{user.email}}');
+    </script>
 {% endblock content %}
