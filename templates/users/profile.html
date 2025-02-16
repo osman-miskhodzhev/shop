@@ -11,7 +11,7 @@
                          src="{{user.profile_image.url}}"
                          class="img-thumbnail">
                 </div>
-                <form action="{% url 'users:update' user.id %}" method='post'>{% csrf_token %}
+                <form action="{% url 'users:update' user.id %}" method='post' enctype="multipart/form-data">{% csrf_token %}
                     <div class="form-row">
                         <div class="col-lg-6">
                             <div class="form-group">
@@ -32,6 +32,7 @@
                         <div class="col-lg-12">
                             <div class="custom-file">
                                 {% comment %} <input type="file" class="custom-file-input" id="userAvatar" size="50"> {% endcomment %}
+                                {{form.profile_image}}
                                 <label class="custom-file-label" for="userAvatar">Выберите изображение</label>
                             </div>
                         </div>
