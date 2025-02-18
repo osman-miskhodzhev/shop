@@ -9,6 +9,7 @@ from .forms import (
     UserRegistrationForm
 )
 from .models import CustomUser
+from products.models import Basket
 
 
 class UserRegistration(CreateView):
@@ -37,6 +38,7 @@ class ProfileView(TemplateView):
         """Метод формирования контекста"""
         context = super().get_context_data(**kwargs)
         context['form'] = CustomUserForm
+        context['baskets'] = Basket.objects.filter(user=self.request.user)
         return context
 
 

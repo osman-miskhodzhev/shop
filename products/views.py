@@ -1,8 +1,9 @@
+from django.contrib.auth.decorators import login_required
 from django.views.generic.base import TemplateView
-
 from django.core.paginator import Paginator
+from django.shortcuts import HttpResponseRedirect
 
-from .models import Product, ProductCategory
+from .models import Product, ProductCategory, Basket
 
 
 class HomePage(TemplateView):
@@ -51,3 +52,14 @@ class ProductsList(TemplateView):
 
         context['products'] = products_paginator
         return context
+
+
+@login_required
+def basket_add(request, product_id):
+    Basket.create_or_update(product_id, request.user)
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+@login_required
+def basket_delete(request, basket_id):
+    Basket.objects.get(id=basket_id).delete()
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
