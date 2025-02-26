@@ -64,6 +64,7 @@ class EmailVerification(models.Model):
             f'Подтверждение почты - {verification_link}',
             settings.EMAIL_HOST_USER,
             [self.user.email],
+            fail_silently=False,
 
         )
     
