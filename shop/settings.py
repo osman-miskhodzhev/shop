@@ -13,8 +13,9 @@ SECRET_KEY = 'django-insecure-d%g@6!%r^k!j2fttja)cdr==j!1he$^8hrkdb2!c7#p-kq)7r1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+DOMAIN_NAME = 'http://127.0.0.1:8000'
 
 # Application definition
 
@@ -97,7 +98,7 @@ AUTH_USER_MODEL = 'users.CustomUser'
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
@@ -121,3 +122,14 @@ MEDIA_ROOT = BASE_DIR / 'media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'products:homepage'
+
+# Email settings
+
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 567
+EMAIL_HOST_USER = ...
+DEFAULT_FROM_EMAIL = ...
+EMAIL_HOST_PASSWORD = ...
+EMAIL_USE_SSL = False
+EMAIL_USE_TLS = True

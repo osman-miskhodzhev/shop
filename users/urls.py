@@ -1,7 +1,7 @@
 from django.contrib.auth import views
 from django.urls import path
 
-from .views import CustomLoginView, ProfileView, UserUpdate, UserRegistration
+from .views import CustomLoginView, ProfileView, UserUpdate, UserRegistration, EmailVerificationView
 
 app_name = 'users'
 
@@ -40,5 +40,10 @@ urlpatterns = [
         "reset/done/",
         views.PasswordResetCompleteView.as_view(),
         name="password_reset_complete",
+    ),
+    path(
+        'verify/<str:email>/<uuid:code>/',
+        EmailVerificationView.as_view(),
+        name='verify'
     ),
 ]
