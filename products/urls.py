@@ -22,7 +22,11 @@ urlpatterns = [
         ProductsList.as_view(),
         name='category-filter'
     ),
-    path('basket/add/<int:product_id>/', basket_add, name='basket-add'),
+    path(
+        'basket/add/<int:product_id>/',
+        basket_add,
+        name='basket-add'
+    ),
     path(
         'basket/delete/<int:basket_id>/',
         basket_delete,

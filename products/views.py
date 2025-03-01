@@ -4,14 +4,15 @@ from django.core.paginator import Paginator
 from django.shortcuts import HttpResponseRedirect
 
 from .models import Product, ProductCategory, Basket
+from core.views import CommonTemplateMixin
 
-
-class HomePage(TemplateView):
+class HomePage(CommonTemplateMixin, TemplateView):
     """Класс представления главной страницы"""
     template_name = 'index.html'
+    title = 'Store'
 
 
-class ProductsList(TemplateView):
+class ProductsList(CommonTemplateMixin, TemplateView):
     """
     Клас представления страницы товаров
     Если в параметрах указана категория товара, товары фильтрутся по этой
@@ -25,6 +26,7 @@ class ProductsList(TemplateView):
     максимум 12 товаров
     """
     template_name = 'products/products.html'
+    title = 'Каталог'
     per_page = 12
 
     def get_context_data(self, **kwargs):

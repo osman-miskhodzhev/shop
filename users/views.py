@@ -11,29 +11,33 @@ from .forms import (
 )
 from .models import CustomUser, EmailVerification
 from products.models import Basket
+from core.views import CommonTemplateMixin
 
 
-class UserRegistration(CreateView):
+class UserRegistration(CommonTemplateMixin, CreateView):
     template_name = 'registration/registration.html'
+    title = 'Регистрация'
     model = CustomUser
     form_class = UserRegistrationForm
     success_url = reverse_lazy('users:login')
 
 
-class CustomLoginView(LoginView):
+class CustomLoginView(CommonTemplateMixin, LoginView):
     """
     Кастомное представление страницы авторизации
     Передает форму авторизации
     """
     form_class = CustomAuthenticationForm
+    title = 'Авторизация'
 
 
-class ProfileView(TemplateView):
+class ProfileView(CommonTemplateMixin, TemplateView):
     """
     Представление профиля
     Передает форму для работы со данными о пользователе
     """
     template_name = 'users/profile.html'
+    title = 'Профиль'
 
     def get_context_data(self, **kwargs):
         """Метод формирования контекста"""
@@ -48,12 +52,12 @@ class UserUpdate(UpdateView):
     model = CustomUser
     form_class = CustomUserForm
 
-    template_name = 'users/profile.html'
-
     success_url = reverse_lazy('users:profile')
 
-class EmailVerificationView(TemplateView):
+
+class EmailVerificationView(CommonTemplateMixin, TemplateView):
     template_name = 'users/email_verification.html'
+    title = 'Подтверждение почты'
 
     def get(self, request, *args, **kwargs):
         code = kwargs['code']
